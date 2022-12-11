@@ -64,9 +64,9 @@ The third and final part of the MQTT topic is the ID, which is generated using `
 |||Booking Manager | `SUB` | Receive booking to persist |
 | `response/create-booking/{id}` **NOT USED! AFTER PUB CREATE-BOOKING, AVAILABILITY CLOCKS OUT AND BM PUBS TO AVAILABILITY TOPIC**| `Booking` | Availability Checker | `SUB` | Receive the saved booking |
 ||| Booking Manager | `PUB` | Send the saved the booking |
-|`request/{approved | denied}/{id}` | `{ _id: ObjectId; }` | Client/Server | `PUB` | Delegate a Booking (deny or approve) |
+|`request/{approved \| denied}/{id}` | `{ _id: ObjectId; }` | Client/Server | `PUB` | Delegate a Booking (deny or approve) |
 |||Booking Manager | `SUB` | Receive ID and persist the Booking's status |
-|`response/{approved | denied}/{id}` | `{ message: string; }` | Client/Server | `SUB` | Notify User whether delegation was successful |
+|`response/{approved \| denied}/{id}` | `{ message: string; }` | Client/Server | `SUB` | Notify User whether delegation was successful |
 |||Booking Manger| `PUB` | Sends delegation result message |
 |`request/booking-requests/{id}`| `{ clinicID: ObjectId; }` | Client/Server | `PUB` | Request specified Clinic's Bookings |
 |||Booking Manager| `SUB` | Query clinic `clinicID` for Bookings |
@@ -74,15 +74,15 @@ The third and final part of the MQTT topic is the ID, which is generated using `
 ||| Booking Manager | `PUB` | Send a list of Bookings |
 | `request/dentist/{id}` | `ObjectId` | Client/Server | `PUB` | Request a specific dentist
 ||| Clinic Portal | `SUB` | Query the specified dentist |
-|`response/dentist/{id}` | `Dentist | { message: string; }` | Client/Server | `SUB` | Display the returned dentist's information or error message |
+|`response/dentist/{id}` | `Dentist \| { message: string; }` | Client/Server | `SUB` | Display the returned dentist's information or error message |
 |||Clinic Portal| `PUB` | Send error message or queried dentist  |
 | `request/clinic/{id}` | `ObjectId` | Client/Server | `PUB` | Request a specific clinic
 ||| Clinic Portal | `SUB` | Query the specified clinic |
-|`response/clinic/{id}` | `Clinic | { message: string; }` | Client/Server | `SUB` | Display the returned clinic's information or error message |
+|`response/clinic/{id}` | `Clinic \| { message: string; }` | Client/Server | `SUB` | Display the returned clinic's information or error message |
 |||Clinic Portal| `PUB` | Send error message or queried clinic |
 | `request/clinics/{id}` | `<empty>` | Client/Server | `PUB` | Request all clinics
 ||| Clinic Portal | `SUB` | Query all clinics |
-|`response/clinics/{id}` | `Clinic[] | { message: string; }` | Client/Server | `SUB` | Display all clinics information or error message |
+|`response/clinics/{id}` | `Clinic[] \| { message: string; }` | Client/Server | `SUB` | Display all clinics information or error message |
 |||Clinic Portal| `PUB` | Send error message or queried clinics |
 
 
