@@ -2,10 +2,10 @@
 
   
 
-This document compiles the complete list of used MQTT topics by all components. The following is described about each topic:
+This document compiles the complete list of MQTT topics that are used by any component. The following is described about each topic:
 
 - MQTT topic in wildcard notation e.g. `request/create-booking/#`
-- The components who interacts with this topic e.g. `Booking Manager`
+- The component that interacts with this topic e.g. `Booking Manager`
 - The type of action they take on this topic e.g. `PUB`
 - General purpose e.g. `Request to create a booking`
 - Interface e.g. `{ email: string; name: string; ... }`
@@ -36,7 +36,7 @@ The second part of the MQTT topic is the service name, which is a short name for
 
 ### ID suffix
 
-The third and final part of the MQTT topic is the ID, which is generated using `Math.random().toString(36).substring(2, 7)` and returns a string of 5 random characters in base 36. This ensures that two components trying to concurrently consume the same service are each publishing and subscribing to a unique topic. For example, Consumer #1 subscribes to `response/login/21a7f` and Consumer #2 subscribes to `response/login/a93d6`. Now, instead of the Authentication Component publishing to `response/login` and potentially mixing up data between consumers, it will instead publish to both topics, meaning each component will get the data they expect.
+The third and final part of the MQTT topic is the ID, which is generated using `Math.random().toString(36).substring(2, 7)` and returns a string of 5 random characters in base 36 (approx. 60 million unique strings). This ensures, with a sufficient level of confidence, that two components trying to concurrently consume the same service are each publishing and subscribing to a unique topic. For example, Consumer #1 subscribes to `response/login/21a7f` and Consumer #2 subscribes to `response/login/a93d6`. Now, instead of the Authentication Component publishing to `response/login` and potentially mixing up data between consumers, it will instead publish to both topics, meaning each component will get the data they expect.
 
   
 
@@ -54,7 +54,7 @@ The third and final part of the MQTT topic is the ID, which is generated using `
 |--|--|--|--|--|
 |`request/login/{id}`| `{ email: string; password: string; }` | Client/Server| `PUB`| Login with provided credentials 
 |||Authentication|`SUB`| Listen for Dentist login requests |
-|`response/login/{id}`| `{ token: string; id: ObjectId; clinicId: ObjectId; } | { message: string; } `| Client/Server | `SUB` | Receive Auth details or error message |
+|`response/login/{id}`| `{ token: string; id: ObjectId; clinicId: ObjectId; }` | `{ message: string; } `| Client/Server | `SUB` | Receive Auth details or error message |
 |||Authentication| `PUB` | Return login status |
 |`request/availability/{id}`|`Booking` | Client/Server | `PUB` | Check if a specified booking is available |
 | | | Availability Checker | `SUB` | Receive booking and check availability |
