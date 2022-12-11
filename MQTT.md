@@ -36,6 +36,12 @@ How?
 ## Use Cases
 ### Case: Dentist login
 
+| Payload step 1 example     | { email: "example123@gmail.com", password: "24hjwb134bwnbj13bb234"} |
+| -------------------------- | ------------------------------------------------------------------------------------------------------ |
+| Payload step 3 example     | {id: "q3423hgw39234rfn23", token:"24df7s89df78sd7f9ssd0f7ds", clinicId: "1dsfsdg889sdf8f9dfsf"}  |
+| Payload step 3 bad example | {message: "Incorrect Credentials"}
+
+         
 
 
 
@@ -50,6 +56,9 @@ How?
 
 ### Case: Create booking request
 
+| Payload step 1, 3 and 5 | { "email": "Emailg@gmail.com", "name": "Björn","clinicId": 1, "issuance": "1602406766314", "date": "2020-12-14", "start": "0900", "end": "1000", "details": "My tooth hurts} |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Payload step 3.a      | {accepted: false}                                                                                                                                                                                               |
 
 | Step | Component              | Type | Topic name                  | Purpose                                                                                                                                                                    |
 | ---- | ---------------------- | ---- | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -65,6 +74,12 @@ How?
 
 ### Case: Approve pending booking request
 
+| Payload step 1   | { “\_id”: “6388849b7a73466d753304ad”}            |
+| ---------------- | ------------------------------------------------ |
+| Payload step 3        | { message: "Booking request has been approved" } |
+| Payload step 3.a | { Booking request was not found  }               |
+
+
 | Step | Component         | Type | Topic name            | Purpose                                                                                                                                                                           |
 | ---- | ----------------- | ---- | --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1    | Clinic Component  | Pub  | /request/approve/{id} | When the employee wants to approve the booking request we send a message with the booking requests object\_id to the booking component.                                           |
@@ -74,6 +89,11 @@ How?
 
 ### Case: Deny pending booking request
 
+| Payload step 1   | { “\_id”: “6388849b7a73466d753304ad”}          |
+| ---------------- | ---------------------------------------------- |
+| Payload step 3        | { message: "Booking request has been denied" } |
+| Payload step 3.a | { Booking request was not found  }             |
+
 | Step | Component         | Type | Topic name           | Purpose                                                                                                                                                                         |
 | ---- | ----------------- | ---- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 1    | Clinic Component  | Pub  | /request/denied/{id} | When the employee wants to deny the booking request we send a message with the booking requests object\_id to the booking component.                                            |
@@ -82,6 +102,11 @@ How?
 | 3.a  | Booking component | Pub  | response/denied/{id} | Send back an error message informing the client of the failed request.                                                                                                          |
 
 ### Case: Retrieving all booking request
+
+| Payload 1        | {“clinicID”: “6388849b7a73466d753304ad” }        |
+| ---------------- | ------------------------------------------------ |
+| Payload step 4        | {\[list of bookings\}                           |
+| Payload step 3.a | { message: "Bookings could not be found" }|
 
 | Step | Component         | Type | Topic name                      | Purpose                                                                                                                        |
 | ---- | ----------------- | ---- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
