@@ -54,7 +54,7 @@ The third and final part of the MQTT topic is the ID, which is generated using `
 |--|--|--|--|--|
 |`request/login/{id}`| `{ email: string; password: string; }` | Client/Server| `PUB`| Login with provided credentials 
 |||Authentication|`SUB`| Listen for Dentist login requests |
-|`response/login/{id}`| `{ token: string; id: ObjectId; clinicId: ObjectId; }` | `{ message: string; } `| Client/Server | `SUB` | Receive Auth details or error message |
+|`response/login/{id}`| `{ token: string; id: ObjectId; clinicId: ObjectId; } \| { message: string; } `| Client/Server | `SUB` | Receive Auth details or error message |
 |||Authentication| `PUB` | Return login status |
 |`request/availability/{id}`|`Booking` | Client/Server | `PUB` | Check if a specified booking is available |
 | | | Availability Checker | `SUB` | Receive booking and check availability |
@@ -62,8 +62,6 @@ The third and final part of the MQTT topic is the ID, which is generated using `
 | | | Booking Manager | `PUB` | Notify consumer about the availability |
 | `request/create-booking/{id}` | `Booking` | Availability Checker | `PUB` | Ask Booking Manager to persist the booking |
 |||Booking Manager | `SUB` | Receive booking to persist |
-| `response/create-booking/{id}` **NOT USED! AFTER PUB CREATE-BOOKING, AVAILABILITY CLOCKS OUT AND BM PUBS TO AVAILABILITY TOPIC**| `Booking` | Availability Checker | `SUB` | Receive the saved booking |
-||| Booking Manager | `PUB` | Send the saved the booking |
 |`request/{approved \| denied}/{id}` | `{ _id: ObjectId; }` | Client/Server | `PUB` | Delegate a Booking (deny or approve) |
 |||Booking Manager | `SUB` | Receive ID and persist the Booking's status |
 |`response/{approved \| denied}/{id}` | `{ message: string; }` | Client/Server | `SUB` | Notify User whether delegation was successful |
