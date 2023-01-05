@@ -231,6 +231,140 @@ We have identified two primary users of the system:
 ## Software Architecture Document (SAD):
 
 
+Written by: John Webb [guswebbjo@student.gu.se](mailto:guswebbjo@student.gu.se) -- DIT-356 Team 03
+
+### **Description of the conceptual design of the architecture** 
+
+The software architecture of our distributed systems project is composed of several architectural styles and design patterns derived from the Project Specification. The system architecture consists of a client for running the web app, an MQTT Broker for communication between the four different nodes of the system and the server, as well as a monolithic database where components can fetch and save data via mongoose. All communication between components is done via MQTT protocol. As the client is the presentation layer, data is merely fetched by the client via MQTT and displayed on the webpage. In this way, all information and business operations are performed outside of the client. As a distributed system, our system can offer increased performance in parallel execution of tasks with efficient use of resources. 
+
+### **Mapping the Conceptual design onto implementation/technologies.** 
+
+As can be seen from our component diagram, we have built a layered system in which the client forms the presentation later, the MQTT Broker and components comprise the business logic layer, and the monolithic database is alone on the database layer. 
+
+
+
+![alt_text](images/componentDiagram.png "image_tooltip")
+
+
+
+The components within our distributed system act as filters, and the flow of information between two components carried over MQTT pub-sub acts as the pipe. The individual components receive information via designated MQTT topics. It is then processed and mutated so that it may then be published to the next component which may further augment and filter the data so that it may perform its designated function. An instance of pipe and filter within our system can be seen when new booking requests are sent through our Availability Checker. The component checks if the requested time slot is available, and either returning the data to the client in case of a failure or mutating the request to include the status that the time slot is available for writing it to the database.
+
+Upon starting the clinic portal server, the mqtt client will be connected and the component will be subscribed to topics regarding the flow of information on clinics and dentists, as can be seen below in
+
+
+<table>
+  <tr>
+   <td>Clinic Portal subscribing to topics on server start
+   </td>
+  </tr>
+  <tr>
+   <td>
+        <img src="images/image.png" width="" alt="alt_text" title="image_tooltip">
+   </td>
+  </tr>
+</table>
+
+
+In a similar fashion, the booking manager will subscribe to the relevant mqtt topics upon starting the component.
+
+
+<table>
+  <tr>
+   <td>Booking manager subscribing to topics on server start
+   </td>
+  </tr>
+  <tr>
+   <td>
+        <img src="images/image2.png" width="" alt="alt_text" title="image_tooltip">
+   </td>
+  </tr>
+</table>
+
+
+
+<table>
+</tr>
+  <tr>
+   <td>Figure 1
+   </td>
+  </tr>
+  <tr>
+   <td>
+        <img src="images/image3.png" width="" alt="alt_text" title="image_tooltip">
+   </td>
+</table>
+
+
+For example, a user in the web application will attempt to book an appointment. At this time a message including the booking request JSON Object is sent to the Availability Checker via the ‘/request/create-booking’ topic (Figure 1). Here the booking request is compared against other bookings for the particular clinic from the database. If the booking request has any time conflicts with booked appointments, the availability checker will inform the user on by publishing a message with {“accepted”: false} via ‘/request/create-booking’. The client will inform the user via a snackbar that the appointment was not created. In addition, should the booking request provided by the client fail to be validated by the Availability Checker, a list of the errors will be included in the message. Figure 2 shows an example response in which the booking request failed to be validated and was missing the clinic id.
+
+
+<table>
+<tr>
+   <td>Figure 2
+   </td>
+  </tr>
+  <tr>
+   <td>
+        <img src="images/image4.png" width="" alt="alt_text" title="image_tooltip">
+   </td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+<tr>
+   <td>Code showing validation and subsequent checking of availabilty for incoming booking
+   </td>
+  </tr>
+  <tr>
+   <td>
+        <img src="images/image5.png" width="" alt="alt_text" title="image_tooltip">
+   </td>
+  </tr>
+</table>
+
+
+In the event there are no booking conflicts and the requested time falls within the opening hours within the clinic and {“accepted”: true} is added to the message body along with the booking request JSON object and is published to the booking manager so that the booking may be created and saved to the database. The user will then be informed that the booking has been created via publishing a response message to the client.  This will trigger a snackbar notification that will alert the user that the appointment was created successfully.
+
+
+####  Identify, state and justify any architecture design decisions or tactics used 
+
+Our design decisions were primarily influenced by the Project Specification which required the inclusion of the three architectural styles: Layered, Pipe-Filter and Publish-Subscribe. 
+
+
+1. MQTT protocol is used for communication between the components as well as the client.
+
+MQTT uses a lightweight messaging protocol which allows for low-cost and high-efficiency communication between the nodes in our system, allowing for high performance and fast response times across the system.. Additionally the MQTT pub-sub model is extremely reliable due to its lightweight nature, giving it high performance. Additionally it has very useful applications for our system and its distributed nature due to MQTTs strong scalability and flexibility. The broker allows for the easy addition and removal of components from the system without compromising other communication throughout the system. It is as easy as unsubscribing from a topic.
+
+The broker can handle a large amount of requests simultaneously with strong performance.
+
+
+2. Pipe and filter is used between components to ensure each component possesses a unique purpose
+
+	As each component fulfills a specific purpose, behavior between components is decoupled, making it easier to both understand and debug. Issues become more easily to isolate when each component performs a specific functionality. The pipe and filter style offers a number of benefits, including a high degree of modularity. As a result, the individual components may be more easily replaced or modified without jeopardizing or affecting the overall stability and functions of the greater system. In addition, modular components promote scalability. Adding new components or increasing the capacity of already existing components is easier. Furthermore pipe-filter style is also known for strong fault tolerance performance. If one component should crash or fail, the rest of the system may continue to operate without disruption. 
+
+
+3. Layered architecture separates parts of our system into presentation, business and database layers.
+
+Using a layered architecture is great for creating separation of concern between components which increases modularity and decoupling throughout the system. Additionally maintainability and clarity are also improved as responsibilities are divided between the various components on each level of the system. This allows for easy identification of errors within the system by isolating issues by layer and component. 
+
+
+##### Road Ahead:
+
+According to what was discussed above, the creation of Deployment diagrams was a necessary addition to inform stakeholders how the architecture of the system will look like on deployment and how we predict the deployment diagram will look in the future as development continues after launch. Therefore, two deployment diagrams were produced to also demonstrate to stakeholders that the architecture and structure of our project will change and be optimized well after its launch to the public.
+
+<br>
+
+Current Deployment Diagram:
+
+<img src="https://i.imgur.com/LN7yhqw.png" width="" alt="alt_text" title="image_tooltip">
+
+<br>
+
+Future Deployment Diagram:
+<img src="https://i.imgur.com/LdIXD7a.png" width="" alt="alt_text" title="image_tooltip">
+
 
 ## Project Management Report (PMR): 
 ○ describe the project management practices used 
