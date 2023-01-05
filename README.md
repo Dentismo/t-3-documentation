@@ -367,6 +367,188 @@ Future Deployment Diagram:
 
 
 ## Project Management Report (PMR): 
-○ describe the project management practices used 
-○ report on important project management decisions regarding schedule and 
-scope. (weekly updates) 
+
+Authors:
+
+Bardia Forooraghi - [bardia.forooraghi@gmail.com](mailto:bardia.forooraghi@gmail.com)
+
+Georg Zsolnai - [georg.zsolnai123@gmail.com](mailto:georg.zsolnai123@gmail.com) 
+
+DIT-356 2022 Team 03
+
+### **Abstract**
+
+It can be difficult for someone moving to Sweden or within Sweden to secure a dentist appointment because many clinics are already at capacity and will turn you away as a new patient. We therefore need to conduct a manual web search and make additional time-consuming calls that have a fair possibility of being successful.
+
+### **Executive Summary**
+
+We started and completed this project over the course of seven weeks, from November 7 to December 16, 2022. The main goal of this project is to make it possible for residents of Gothenburg to schedule dental appointments using a graphical user interface. Users will be able to search for available times within their own time frames, schedule appointments, and receive confirmation or rejection from the system. In order to finish the project before the deadline, this report intends to describe its progress, milestones, and gaps.
+
+### **Objectives**
+
+The following are the main goals of this Project Management Report:
+
+
+* To communicate the progress and milestone of the project
+* To summarize the key decisions that have been taken throughout the development process
+
+### **Project Resources**
+
+* [Here](https://trello.com/b/t51qFSzb/dentist-appointment-booking-system) is our Trello board where we kept track of the progress of our project
+* [Here](https://git.chalmers.se/courses/dit355/dit356-2022/t-3) is a link to our Gitlab repositories, where our actual project is located
+* [Here](https://canvas.gu.se/courses/61834/assignments) is a link to our retrospective reports
+
+### **Strategy**
+
+To facilitate better and more efficient teamwork, the team embraced Scrum, an agile project management framework. We split the development process into one-week sprints when our team accomplished a specific task, such as creating a possibly shippable increment of the product to be built. Every sprint began with a sprint planning meeting where everyone contributed their own user stories for discussion. Once the product backlog items (PBIs) were completed, the team and the Product Owner used the planning poker technique to decide which PBIs should receive the highest priority for the following sprint. Delegating tasks were done once these PBIs were transferred from the Product Backlog to the Sprint Backlog. We had two meetings a week; one was a check-up when each team member reported on what they had accomplished since the last meeting, what they planned to do, and what was standing in their way of achieving the sprint objective. Problem-solving wouldn't be covered in that meeting. When necessary, a different meeting was scheduled to delve more into issues. The second was a sprint review, where the team met with important stakeholders (the Product Owner and Scrum Masters) to discuss the finished product. If a task was still undone at that sprint, it was added back to the product backlog. In order to keep stakeholders informed about the project's progress, obstacles, and other details, the development team also had weekly meetings with other stakeholders including the TA.
+
+Our approach to roles and responsibilities was to begin working with two separate scrum teams, each with its own scrum master managing the backend and frontend simultaneously. The key motivation behind this was to effectively complete the frontend while still making progress on the backend. It was excellent to complete the majority of the implementation because the UI was simple and did not have a lot of pages, so it was unnecessary to concentrate on it in the following weeks. The following weeks took on a different appearance as we went back to using a single scrum team with a single scrum master, which allowed us to build new features on top of the frontend and backend already-existing foundation. As a result, it was simpler to implement modifications and any developer was able to link the frontend and backend. The main objective was to provide a foundation upon which all members of the collective could view the visual and technical aspects of the system.
+
+Task distribution was the responsibility of a scrum master. Although we made an effort to assign duties in accordance with team members' preferences, we kept in mind the necessity of assigning tasks in accordance with each member's abilities, prior knowledge, and experience. That enabled our group to pick up the pace and deliver the product on schedule. For instance, the members of the frontend team (Ansis, Georg, and Ivan) were selected based on their proficiency with the React framework and other APIs, such as node-mailer and Google Maps. On the other hand, the backend team (Bardia, Carl, John, and Daniel) was selected due to their experience with MQTT, NoSQL databases (Mongodb), and Node.js. With the most experienced individuals on each team, this would allow each team to work even more quickly.
+
+### **Roles**
+
+<table>
+  <tr>
+   <td>Team member’s name
+   </td>
+   <td>Role
+   </td>
+   <td>Duration
+   </td>
+  </tr>
+  <tr>
+   <td>Ansis Plepis
+   </td>
+   <td>Frontend scrum master
+   </td>
+   <td>From Week 1 to week 4 
+<p>
+(7 Nov to 5 dec)
+   </td>
+  </tr>
+  <tr>
+   <td>Bardia Forooraghi
+   </td>
+   <td>Backend scrum master
+   </td>
+   <td>From Week 1 to week 4 
+<p>
+(7 Nov to 5 dec)
+   </td>
+  </tr>
+  <tr>
+   <td>Carl Dahlqvist Thuresson
+   </td>
+   <td>Full stack scrum master
+   </td>
+   <td>week 5
+<p>
+(05 dec to 12 dec)
+   </td>
+  </tr>
+  <tr>
+   <td>Daniel Dovhun
+   </td>
+   <td>Scrum member
+   </td>
+   <td>From Week 1 to week 6
+<p>
+(07 Nov to 16 dec)
+   </td>
+  </tr>
+  <tr>
+   <td>Georg Zsolnai
+   </td>
+   <td>Product Owner
+   </td>
+   <td>From Week 1 to week 6
+<p>
+(07 Nov to 16 dec)
+   </td>
+  </tr>
+  <tr>
+   <td>Ivan Vidackovic
+   </td>
+   <td>Frontend scrum member
+   </td>
+   <td>From Week 1 to week 6
+<p>
+(07 Nov to 16 dec)
+   </td>
+  </tr>
+  <tr>
+   <td>John Christopher Webb 
+   </td>
+   <td>Full stack scrum master
+   </td>
+   <td>week 6
+<p>
+(12 dec to 16 dec)
+   </td>
+  </tr>
+</table>
+
+
+### **Project’s Functional Decomposition Diagram**
+
+
+![alt_text](images/image6.png "image_tooltip")
+
+
+### **Project’s ER Diagram**
+
+
+![alt_text](images/image7.png "image_tooltip")
+
+
+## **Development Weeks**
+
+We will now examine each week in further detail to determine the choices made for each week. We intended to put up the project structure from November 1 to November 7, as well as meet and explain our plan to our seventh team member. Consequently, we began working on our project during the second week of the course.
+
+**Week 1 (from 7 November to 14 November)**
+
+We chose to begin our sprint on Monday, November 7, 2022, and we estimated that it would last for exactly one week. The sprint would consist of 30 story points. The number 30 has been chosen because we wanted to keep the workload low so that we could concentrate more on organization and strategy than mere implementation. These 30 points were divided equally between the two teams, with an emphasis on the frontend elements as described in the strategy section.
+
+This week, we began setting up the team and thinking about how to organize our development process. To build our distributed system, we also went with the MERN stack. The team's selection was reached after considering its collective motivation and ambitions, experiences from the prior course, and experiences from the course. The team sought to learn a new technology while keeping in mind the constraints of the task at hand and its existing scope. Since a few of the participants had experience with React prior to taking the course, we believed that there wouldn't be a significant learning curve, especially given how little time is spent on frontend development throughout the course.
+
+**Week 2 (from 14 November to 21 November)**
+
+The primary choice that was made involved establishing a software architecture in accordance with the project specifications, which included pipe and filter, client-server, and publish and subscribe. Georg Zsolnai (Product Owner) and Bardia Forooraghi (Backend Scrum master) defined the project's architecture. The initial design looked like the image below (figure 1), 
+
+
+![alt_text](images/image8.png "image_tooltip")
+
+
+Figure 1
+
+but it was updated to figure 2 due to limitations in time and money. We came to the conclusion that it was not possible to have distributed databases within a seven-week period, and we also had to pay to have more than one database in the MongoDB Atlas.
+
+
+![alt_text](images/componentDiagram.png "image_tooltip")
+
+
+Figure 2
+
+Our website uses external APIs for maps and a calendar, and we reorganized scrum teams to incorporate more backend personnel in light of the addition of a new team member. Last but not least, we began classifying user stories according to the relevant repositories based on the new design.
+
+Week 3 (from 21 November to 28 November)
+
+The majority of the frontend was finished, while backend components like "Authentication" and "Clinic Portal" were also finished. We had anticipated this progress although would have appreciated both sides to be done by this week, however, as there were bugs and extra features to add it was fine in terms of how we planned out our week.
+
+We wanted to finish all of the frontend components and their connections before implementing the circuit breaker, but some of the backend components, like "Availability Checker" and "Booking Manager," were still in progress. As a result, we decided to push back the frontend and backend connection to the following sprint. The same is true for the implementation of circuit breakers; while having a backend and frontend that both functioned independently, we did not have a website as a complete. Circuit Breaker couldn't be implemented, therefore we opted to do it in the next sprints after everything is finished. We did however research different circuit breakers as a side task for every scrum member.
+
+Week 4 (from 28 November to 5 December)
+
+The remaining backend elements, including "Availability Checker" and "Booking Manager," were completed as well. Additionally,we managed to complete the connection of the frontend to the "Authentication" component via the Login page so that dentists can now login. This was the first connection made to display the Pub/Sub architecture as well as the Layered architecture as there is a conversation between the frontend and backend over the MQTT protocol.
+
+We made the decision to begin connecting components with the frontend in order to display pertinent information, and we were able to accomplish this aim as well as complete frontend implementation, enabling the connection of all components. Other crucial choices we made included looking into the appropriate circuit breaker libraries for subsequent implementation and choosing nodemailer as our technology for success emails.
+
+Week 5 (from 5 December to 12 December)
+
+All of the bugs we discovered were fixed, and the frontend and backend components were all connected. Node mailer was operational and worked as intended for the purpose it was implemented for. After conducting research on "circuit breaker," the team decided to construct it utilizing the Opossum API. Software architecture document (SAD), project management report (PMR), and software requirement specifications, among others, have been created.
+
+Week 6 (from 12 December to 16 December)
+
+This week's objectives were to finish the SRS, which was the only document still unfinished, update the docs, fix the bug that prevented requests from being posted to the MQTT topic, and refine the design of the dashboard page. At this point we have connected all components are completing the documentation required for the 
+
