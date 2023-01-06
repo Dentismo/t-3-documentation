@@ -532,23 +532,25 @@ Figure 2
 
 Our website uses external APIs for maps and a calendar, and we reorganized scrum teams to incorporate more backend personnel in light of the addition of a new team member. Last but not least, we began classifying user stories according to the relevant repositories based on the new design.
 
-Week 3 (from 21 November to 28 November)
+**Week 3 (from 21 November to 28 November)**
 
 The majority of the frontend was finished, while backend components like "Authentication" and "Clinic Portal" were also finished. We had anticipated this progress although would have appreciated both sides to be done by this week, however, as there were bugs and extra features to add it was fine in terms of how we planned out our week.
 
 We wanted to finish all of the frontend components and their connections before implementing the circuit breaker, but some of the backend components, like "Availability Checker" and "Booking Manager," were still in progress. As a result, we decided to push back the frontend and backend connection to the following sprint. The same is true for the implementation of circuit breakers; while having a backend and frontend that both functioned independently, we did not have a website as a complete. Circuit Breaker couldn't be implemented, therefore we opted to do it in the next sprints after everything is finished. We did however research different circuit breakers as a side task for every scrum member.
 
-Week 4 (from 28 November to 5 December)
+**Week 4 (from 28 November to 5 December)**
 
 The remaining backend elements, including "Availability Checker" and "Booking Manager," were completed as well. Additionally,we managed to complete the connection of the frontend to the "Authentication" component via the Login page so that dentists can now login. This was the first connection made to display the Pub/Sub architecture as well as the Layered architecture as there is a conversation between the frontend and backend over the MQTT protocol.
 
 We made the decision to begin connecting components with the frontend in order to display pertinent information, and we were able to accomplish this aim as well as complete frontend implementation, enabling the connection of all components. Other crucial choices we made included looking into the appropriate circuit breaker libraries for subsequent implementation and choosing nodemailer as our technology for success emails.
 
-Week 5 (from 5 December to 12 December)
+**Week 5 (from 5 December to 12 December)**
 
 All of the bugs we discovered were fixed, and the frontend and backend components were all connected. Node mailer was operational and worked as intended for the purpose it was implemented for. After conducting research on "circuit breaker," the team decided to construct it utilizing the Opossum API. Software architecture document (SAD), project management report (PMR), and software requirement specifications, among others, have been created.
 
-Week 6 (from 12 December to 16 December)
+**Week 6 (from 12 December to 16 December)**
 
-This week's objectives were to finish the SRS, which was the only document still unfinished, update the docs, fix the bug that prevented requests from being posted to the MQTT topic, and refine the design of the dashboard page. At this point we have connected all components are completing the documentation required for the 
+This week's objectives were to finish the SRS, which was the only document still unfinished, update the docs, fix the bug that prevented requests from being posted to the MQTT topic, and refine the design of the dashboard page. At this point we have connected all components and are completing the documentation required for the final submission of the project.
+
+This week is the week at which we wrapped up most of the work required for the submission. The final presenation for the TA will be the 9th of January and the presentation for the Teacher will be the 11th of January. The week prior to this (Jan 2 - Jan 6) will be dedicated to preparing the presenation for the TA and finishing Retrospective 4, therefore, all code and bug fixes must be completed in the current week 6 iteration
 
